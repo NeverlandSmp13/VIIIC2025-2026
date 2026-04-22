@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIII C | Serviam Digital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        :root { --bg: #050505; --card: #111; --accent: #ffffff; --tiktok: #ff0050; --ig: #E1306C; --anon: #00f2ea; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- LOADING SCREEN --- */
+        #loader {
+            position: fixed; width: 100%; height: 100vh; background: #000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; transition: 1s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        .serviam-logo { width: 120px; animation: pulse 2.5s infinite ease-in-out; }
+        .loader-bar-container { width: 200px; height: 1px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; margin-top: 25px; }
+        .loader-bar-fill { position: absolute; width: 0; height: 100%; background: #fff; animation: loadingProgress 2.5s forwards; }
+        @keyframes loadingProgress { to { width: 100%; } }
+        @keyframes pulse { 0%, 100% { transform: scale(0.95); opacity: 0.7; } 50% { transform: scale(1.05); opacity: 1; } }
+        .loaded #loader { transform: translateY(-100%); opacity: 0; visibility: hidden; }
+
+        /* --- NAVIGATION SPA --- */
+        .page { display: none; min-height: 100vh; }
+        .active-page { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- HOME PAGE HERO --- */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('IMG-20260224-WA0029.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed; text-align: center;
+        }
+        .hero .year-text { font-size: 0.8rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.8; font-weight: 300; }
+        .hero h1 { font-size: clamp(2.5rem, 10vw, 8rem); font-weight: 900; letter-spacing: -4px; line-height: 0.85; text-transform: uppercase; margin-bottom: 25px; }
+        .nav-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 20px; }
+        .btn-nav { padding: 14px 25px; border: 1px solid white; color: white; text-decoration: none; border-radius: 50px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; background: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-nav:hover { background: white; color: black; }
+        .btn-anon { border-color: var(--anon); color: var(--anon); }
+        .btn-anon:hover { background: var(--anon); color: black; }
+
+        /* --- CONTENT WRAPPER --- */
+        .main-content { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+
+        /* --- CUBE SLIDER CLASS MOMENTS --- */
+        .moments-container { width: 100%; max-width: 450px; margin: 0 auto; perspective: 1000px; padding-bottom: 40px; }
+        .swiper-moments { width: 100%; height: 450px; border-radius: 25px; }
+        .swiper-moments .swiper-slide { border-radius: 25px; overflow: hidden; border: 1px solid #222; }
+        .swiper-moments img { width: 100%; height: 100%; object-fit: cover; }
+        .swiper-button-next, .swiper-button-prev { color: white !important; transform: scale(0.5); background: rgba(0,0,0,0.3); padding: 30px; border-radius: 50%; }
+
+        /* --- MAPS BOX --- */
+        .maps-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid #222; filter: grayscale(1) invert(0.9); transition: 0.5s; margin-top: 20px; }
+        .maps-box:hover { filter: grayscale(0) invert(0); }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* --- TABLES & FORMS --- */
+        .table-box { background: var(--card); border: 1px solid #222; border-radius: 20px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px 25px; text-align: left; border-bottom: 1px solid #222; }
+        .form-box { background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid #222; margin-bottom: 40px; }
+        input, select, textarea { width: 100%; background: #0a0a0a; border: 1px solid #222; padding: 15px; border-radius: 12px; color: white; margin-top: 10px; outline: none; }
+        .feed-card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 20px; position: relative; }
+        .btn-delete { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #333; cursor: pointer; transition: 0.3s; }
+        .btn-delete:hover { color: #ff4d4d; }
+        
+        .nav-header { padding: 20px; position: sticky; top: 0; background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; }
+        footer { text-align: center; padding: 80px 20px; }
+        .credit { font-size: 0.6rem; color: #555; letter-spacing: 1px; margin-top: 10px; }
+        .credit b { color: #888; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <img src="1000957435-removebg-preview.png" class="serviam-logo">
+        <div class="loader-bar-container"><div class="loader-bar-fill"></div></div>
+    </div>
+
+    <div id="home-page" class="page active-page">
+        <header class="hero">
+            <div class="year-text">Tahun Ajaran 2023/2026</div>
+            <h1>WELCOME TO<br>VIII C</h1>
+            <div class="nav-buttons">
+                <button class="btn-nav" onclick="showPage('tugas-page')"><i class="fa-solid fa-paper-plane"></i> CLASS FEED</button>
+                <button class="btn-nav btn-anon" onclick="showPage('anon-page')"><i class="fa-solid fa-user-secret"></i> PESAN ANONIM</button>
+                <a href="https://www.tiktok.com/@eightc_kthdoz" target="_blank" class="btn-nav"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
+                <a href="https://www.instagram.com/8c.smptheodorus" target="_blank" class="btn-nav"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="section-header"><p style="color:#555; letter-spacing:3px; font-size:0.7rem; text-transform:uppercase;">Memories</p><h2>CLASS MOMENTS</h2></section>
+            <div class="moments-container">
+                <div class="swiper swiper-moments">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="IMG-20250814-WA0058.jpg"></div>
+                        <div class="swiper-slide"><img src="IMG-20251111-WA0071.jpg"></div>
+                        <div class="swiper-slide"><img src="IMG-20251111-WA0103.jpg"></div>
+                        <div class="swiper-slide"><img src="IMG-20251124-WA0011.jpg"></div>
+                        <div class="swiper-slide"><img src="IMG-20260127-WA0049.jpg"></div>
+                        <div class="swiper-slide"><img src="IMG-20260417-WA0010.jpg"></div>
+                        <div class="swiper-slide"><img src="IMG-20260420-WA0004.jpg"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+
+            <section class="section-header" style="margin-top:80px;"><p style="color:#555; letter-spacing:3px; font-size:0.7rem; text-transform:uppercase;">Student Roll</p><h2>DAFTAR SISWA</h2></section>
+            <div class="table-box">
+                <table>
+                    <thead><tr><th style="color:#555; font-size:0.7rem;">NO</th><th style="color:#555; font-size:0.7rem;">NAMA LENGKAP</th></tr></thead>
+                    <tbody id="list-siswa"></tbody>
+                </table>
+            </div>
+
+            <section class="section-header" style="margin-top:100px;"><p style="color:#555; letter-spacing:3px; font-size:0.7rem; text-transform:uppercase;">Our Location</p><h2>SCHOOL MAPS</h2></section>
+            <div class="maps-box">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.1762391206494!2d124.31505327421111!3d0.7486411630138927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327f3d69685a6d39%3A0xf6e6b4d819b164f0!2sKampus%20SMP-SMA%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1713757522543!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </main>
+
+        <footer>
+            <div style="font-size:0.7rem; opacity:0.3; letter-spacing:5px;">VIII C — THEODORUS</div>
+            <div class="credit">Website Created by <b>Riven Moningka</b></div>
+        </footer>
+    </div>
+
+    <div id="tugas-page" class="page">
+        <nav class="nav-header">
+            <button onclick="showPage('home-page')" style="background:none; border:none; color:white; cursor:pointer; font-size:0.7rem; letter-spacing:2px;">← BACK</button>
+            <span style="font-size:0.7rem; font-weight:800; letter-spacing:2px;">CLASS FEED</span>
+        </nav>
+        <div class="main-content" style="max-width: 700px; padding-top: 40px;">
+            <div class="form-box">
+                <input type="text" id="sender" placeholder="Nama lo...">
+                <select id="subject" style="margin-top:15px;"><option>Matematika</option><option>IPA</option><option>B. Indonesia</option><option>Info Umum</option></select>
+                <textarea id="msg" placeholder="Tulis tugas atau info kelas..."></textarea>
+                <input type="file" id="imgFile" accept="image/*">
+                <button class="btn-nav" style="width:100%; border-radius:12px; margin-top:15px; background:white; color:black;" onclick="postFeed('feed')">Post ke Feed</button>
+            </div>
+            <div id="feed-container"></div>
+        </div>
+    </div>
+
+    <div id="anon-page" class="page">
+        <nav class="nav-header">
+            <button onclick="showPage('home-page')" style="background:none; border:none; color:white; cursor:pointer; font-size:0.7rem; letter-spacing:2px;">← BACK</button>
+            <span style="font-size:0.7rem; font-weight:800; letter-spacing:2px; color:var(--anon);">SECRET MESSAGE</span>
+        </nav>
+        <div class="main-content" style="max-width: 700px; padding-top: 40px;">
+            <div class="form-box" style="border-color:var(--anon);">
+                <p style="font-size:0.7rem; color:#888; margin-bottom:10px;">Pesan lo bakal anonim. 🤫</p>
+                <textarea id="anonMsg" placeholder="Tulis pesan rahasia..."></textarea>
+                <button class="btn-nav btn-anon" style="width:100%; border-radius:12px; margin-top:15px;" onclick="postFeed('anon')">Kirim Secara Anonim</button>
+            </div>
+            <div id="anon-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Init
+        window.addEventListener('load', () => setTimeout(() => {
+            document.body.classList.add('loaded');
+            new Swiper('.swiper-moments', {
+                effect: 'cube', grabCursor: true, loop: true, speed: 1000,
+                cubeEffect: { shadow: true, slideShadows: true, shadowOffset: 20, shadowScale: 0.94 },
+                autoplay: { delay: 3500, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            });
+        }, 2500));
+
+        function showPage(p) {
+            document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
+            document.getElementById(p).classList.add('active-page');
+            window.scrollTo(0,0);
+        }
+
+        const names = ["Abigail L. Wowor", "Bosco B. Kuntag", "Evelyn M. Prasetya", "Gabriela H. Rumagit", "Gabrielle F. Rondonuwu", "Gracyella S. Watuseke", "Injiltia T. Maratade", "Ivy R. X. Piri", "Jillian I. Rondonuwa", "Joachim L. Rerung", "Jonathan M. Gunadi", "Kayla D. T. Mantiri", "Kimberly G. Tamba", "Kingsley A. Monde", "Laurency I. B. Tuela", "Lionel J. Kojongian", "Maria F. G. Polla", "Michaela L. N. Pelealzu", "Michayla N. Rori", "Nathanael B. Lambayang", "Qimberly L. L. Lonton", "Queennovi Daraung", "Raylene L. L. Pranata", "Riven C. A. Moningka", "Russel Carundeng", "Stacey E. D. Ratag", "Theresia D. J. K. Mundung", "Toar G. Pieter", "Valentino Mogot", "Whitney V. R. Liono"];
+        const tb = document.getElementById('list-siswa');
+        names.forEach((n, i) => tb.innerHTML += `<tr><td style="color:#444; font-weight:800;">${String(i+1).padStart(2,'0')}</td><td>${n}</td></tr>`);
+
+        function postFeed(type) {
+            let n, m, s, i, key;
+            if(type === 'feed') {
+                n = document.getElementById('sender').value; m = document.getElementById('msg').value;
+                s = document.getElementById('subject').value; i = document.getElementById('imgFile'); key = '8C_ULTIMATE_FEED';
+            } else {
+                n = "Rahasia 🤫"; m = document.getElementById('anonMsg').value; s = "Secret"; key = '8C_ULTIMATE_ANON';
+            }
+            if(!m || (type==='feed' && !n)) return alert("Lengkapi data!");
+            if(type === 'feed' && i.files[0]) {
+                const r = new FileReader();
+                r.onload = (e) => save(n, m, s, e.target.result, key);
+                r.readAsDataURL(i.files[0]);
+            } else save(n, m, s, null, key);
+        }
+
+        function save(n, m, s, img, key) {
+            const db = JSON.parse(localStorage.getItem(key)) || [];
+            db.push({id: Date.now(), n, m, s, img, date: new Date().toLocaleString()});
+            localStorage.setItem(key, JSON.stringify(db));
+            location.reload(); 
+        }
+
+        function deletePost(id, key) {
+            if(confirm("Hapus?")) {
+                let db = JSON.parse(localStorage.getItem(key));
+                db = db.filter(x => x.id !== id);
+                localStorage.setItem(key, JSON.stringify(db));
+                load();
+            }
+        }
+
+        function load() {
+            const fC = document.getElementById('feed-container');
+            const aC = document.getElementById('anon-container');
+            const fD = (JSON.parse(localStorage.getItem('8C_ULTIMATE_FEED')) || []).reverse();
+            const aD = (JSON.parse(localStorage.getItem('8C_ULTIMATE_ANON')) || []).reverse();
+            fC.innerHTML = ""; aC.innerHTML = "";
+            fD.forEach(t => fC.innerHTML += card(t, '8C_ULTIMATE_FEED'));
+            aD.forEach(t => aC.innerHTML += card(t, '8C_ULTIMATE_ANON'));
+        }
+
+        function card(t, key) {
+            return `<div class="feed-card">
+                <button class="btn-delete" onclick="deletePost(${t.id},'${key}')"><i class="fa-solid fa-trash"></i></button>
+                <b style="color:${t.n.includes('Rahasia')?'var(--anon)':'white'}">${t.n}</b>
+                <span style="float:right; background:white; color:black; font-size:0.6rem; padding:3px 8px; border-radius:5px; font-weight:800;">${t.s}</span>
+                <p style="font-size:0.85rem; color:#ccc; margin-top:10px; white-space:pre-wrap;">${t.m}</p>
+                ${t.img ? `<img src="${t.img}" style="width:100%; border-radius:12px; margin-top:15px; border:1px solid #222;">` : ''}
+                <div style="font-size:0.6rem; color:#333; margin-top:10px;">${t.date}</div>
+            </div>`;
+        }
+        load();
+    </script>
+</body>
+</html>
