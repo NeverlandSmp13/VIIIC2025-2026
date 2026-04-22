@@ -23,7 +23,6 @@
         .loader-text { color: #fff; font-size: 2.5rem; font-weight: 900; letter-spacing: 15px; text-transform: uppercase; animation: pulse 2s infinite; margin-right: -15px; }
         .loader-bar-container { width: 180px; height: 1px; background: rgba(255,255,255,0.1); margin: 20px auto 0; position: relative; overflow: hidden; }
         .loader-bar-fill { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: #fff; animation: loadFill 2s forwards; }
-
         @keyframes loadFill { to { width: 100%; } }
         @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
         .loaded #loader { opacity: 0; visibility: hidden; }
@@ -39,35 +38,45 @@
             background-size: cover; background-position: center; text-align: center;
         }
         .hero h1 { font-size: clamp(2rem, 8vw, 6.5rem); font-weight: 900; letter-spacing: -2px; text-transform: uppercase; line-height: 0.9; }
-        
         .nav-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 30px; padding: 0 20px; }
         .btn-nav { padding: 12px 24px; border: 1px solid white; color: white; text-decoration: none; border-radius: 50px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; background: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .btn-nav:hover { background: white; color: black; transform: translateY(-3px); }
 
+        /* MAPS BOX */
+        .maps-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid #222; filter: grayscale(1) invert(0.92); margin-top: 20px; }
+        iframe { width: 100%; height: 100%; border: none; }
+
         .main-content { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
         .section-header { text-align: center; margin-bottom: 50px; }
 
+        /* FEED CARDS */
         .feed-card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 25px; margin-bottom: 20px; position: relative; }
-        .btn-delete { position: absolute; bottom: 20px; right: 25px; background: none; border: none; color: #ff4d4d; font-size: 0.7rem; cursor: pointer; opacity: 0.6; transition: 0.3s; }
+        .feed-card img { width: 100%; border-radius: 12px; margin-top: 15px; border: 1px solid #222; cursor: zoom-in; }
+        .card-actions { position: absolute; bottom: 20px; right: 25px; display: flex; gap: 15px; align-items: center; }
+        .btn-action { background: none; border: none; font-size: 0.75rem; cursor: pointer; opacity: 0.6; transition: 0.3s; color: white; display: flex; align-items: center; gap: 5px; }
+        .btn-dl { color: #00f2ea; }
+        .btn-del { color: #ff4d4d; }
+
+        /* MODAL */
+        #imageModal {
+            display: none; position: fixed; z-index: 100000; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); justify-content: center; align-items: center; cursor: zoom-out;
+        }
+        #modalImg { max-width: 90%; max-height: 90%; border-radius: 10px; }
 
         .table-box { background: var(--card); border: 1px solid #222; border-radius: 20px; overflow: hidden; margin-bottom: 50px; }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #222; font-size: 0.9rem; }
-        
-        /* FIXED MAPS BOX */
-        .maps-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid #222; filter: grayscale(1) invert(0.9); }
-        iframe { width: 100%; height: 100%; border: none; }
-
-        .moments-container { width: 100%; max-width: 400px; margin: 0 auto; padding-bottom: 50px; }
-        .swiper-moments { width: 100%; height: 400px; border-radius: 20px; }
-        .swiper-moments img { width: 100%; height: 100%; object-fit: cover; }
-
+        td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #222; font-size: 0.9rem; }
         .form-box { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid #222; margin-bottom: 30px; }
         input, select, textarea { width: 100%; background: #000; border: 1px solid #222; padding: 15px; border-radius: 10px; color: white; margin-top: 10px; outline: none; }
         .nav-header { padding: 20px; position: sticky; top: 0; background: rgba(5,5,5,0.95); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; }
     </style>
 </head>
 <body>
+
+    <div id="imageModal" onclick="this.style.display='none'">
+        <img id="modalImg">
+    </div>
 
     <div id="loader">
         <div class="loader-text">VIII C</div>
@@ -87,20 +96,6 @@
         </header>
 
         <main class="main-content">
-            <section class="section-header"><h2>CLASS MOMENTS</h2></section>
-            <div class="moments-container">
-                <div class="swiper swiper-moments">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="IMG-20250814-WA0058.jpg"></div>
-                        <div class="swiper-slide"><img src="IMG-20251111-WA0071.jpg"></div>
-                        <div class="swiper-slide"><img src="IMG-20251111-WA0103.jpg"></div>
-                        <div class="swiper-slide"><img src="IMG-20251124-WA0011.jpg"></div>
-                        <div class="swiper-slide"><img src="IMG-20260127-WA0049.jpg"></div>
-                        <div class="swiper-slide"><img src="IMG-20260417-WA0010.jpg"></div>
-                    </div>
-                </div>
-            </div>
-
             <section class="section-header"><h2>DAFTAR SISWA</h2></section>
             <div class="table-box">
                 <table><tbody id="list-siswa"></tbody></table>
@@ -108,7 +103,11 @@
 
             <section class="section-header"><h2>LOCATION</h2></section>
             <div class="maps-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.47525381831!2d124.3151092758863!3d0.7486422629235777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32e33d69285a6d39%3A0xffe6b4d619b164f0!2sKampus%20SMP-SMA%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1713783000000!5m2!1sid!2sid"></iframe>
+                <iframe 
+                    src="https://maps.google.com/maps?q=SMP%20Katolik%20Theodorus%2C%20Kotamobagu&t=&z=17&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen 
+                    loading="lazy">
+                </iframe>
             </div>
         </main>
         
@@ -145,16 +144,27 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.body.classList.add('loaded'); new Swiper('.swiper-moments', { effect: 'cube', loop: true, autoplay: {delay:3000} }); }, 1500);
-        });
+        window.addEventListener('load', () => { setTimeout(() => { document.body.classList.add('loaded'); }, 1500); });
 
         function showPage(p) {
             document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active-page'));
             document.getElementById(p).classList.add('active-page');
             window.scrollTo(0,0);
+        }
+
+        function openImg(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+
+        function downloadImg(src, name) {
+            const link = document.createElement('a');
+            link.href = src;
+            link.download = `8C_Feed_${name.replace(/\s/g, '_')}_${Date.now()}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         const names = ["Abigail L. Wowor", "Bosco B. Kuntag", "Evelyn M. Prasetya", "Gabriela H. Rumagit", "Gabrielle F. Rondonuwu", "Gracyella S. Watuseke", "Injiltia T. Maratade", "Ivy R. X. Piri", "Jillian I. Rondonuwa", "Joachim L. Rerung", "Jonathan M. Gunadi", "Kayla D. T. Mantiri", "Kimberly G. Tamba", "Kingsley A. Monde", "Laurency I. B. Tuela", "Lionel J. Kojongian", "Maria F. G. Polla", "Michaela L. N. Pelealzu", "Michayla N. Rori", "Nathanael B. Lambayang", "Qimberly L. L. Lonton", "Queennovi Daraung", "Raylene L. L. Pranata", "Riven C. A. Moningka", "Russel Carundeng", "Stacey E. D. Ratag", "Theresia D. J. K. Mundung", "Toar G. Pieter", "Valentino Mogot", "Whitney V. R. Liono"];
@@ -178,32 +188,35 @@
         }
 
         function savePost(data) {
-            const db = JSON.parse(localStorage.getItem('8C_FINAL_DB')) || [];
+            const db = JSON.parse(localStorage.getItem('8C_FINAL_DB_V2')) || [];
             db.push({ ...data, date: new Date().toLocaleString(), id: Date.now() });
-            localStorage.setItem('8C_FINAL_DB', JSON.stringify(db));
+            localStorage.setItem('8C_FINAL_DB_V2', JSON.stringify(db));
             location.reload();
         }
 
         function deletePost(id) {
             if(confirm("Hapus?")) {
-                let db = JSON.parse(localStorage.getItem('8C_FINAL_DB')) || [];
+                let db = JSON.parse(localStorage.getItem('8C_FINAL_DB_V2')) || [];
                 db = db.filter(p => p.id !== id);
-                localStorage.setItem('8C_FINAL_DB', JSON.stringify(db));
+                localStorage.setItem('8C_FINAL_DB_V2', JSON.stringify(db));
                 location.reload();
             }
         }
 
         function loadPosts() {
-            const db = (JSON.parse(localStorage.getItem('8C_FINAL_DB')) || []).reverse();
+            const db = (JSON.parse(localStorage.getItem('8C_FINAL_DB_V2')) || []).reverse();
             db.forEach(t => {
                 const card = `
                     <div class="feed-card">
                         <span style="float:right; background:white; color:black; font-size:0.6rem; padding:3px 8px; border-radius:4px; font-weight:800;">${t.s}</span>
                         <b style="color:${t.type==='anon'?'var(--anon)':'white'}">${t.n}</b>
                         <p style="margin-top:15px; color:#ccc; white-space:pre-wrap;">${t.m}</p>
-                        ${t.img ? `<img src="${t.img}" style="width:100%; border-radius:12px; margin-top:15px; border:1px solid #222;">` : ''}
+                        ${t.img ? `<img src="${t.img}" onclick="openImg('${t.img}')">` : ''}
                         <div style="font-size:0.6rem; color:#444; margin-top:15px;">${t.date}</div>
-                        <button class="btn-delete" onclick="deletePost(${t.id})">Hapus</button>
+                        <div class="card-actions">
+                            ${t.img ? `<button class="btn-action btn-dl" onclick="downloadImg('${t.img}', '${t.n}')"><i class="fa-solid fa-download"></i></button>` : ''}
+                            <button class="btn-action btn-del" onclick="deletePost(${t.id})"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
                     </div>`;
                 document.getElementById(t.type === 'feed' ? 'feed-container' : 'anon-container').innerHTML += card;
             });
