@@ -13,27 +13,39 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- LOADING SCREEN PREMIUM --- */
+        /* =========================================
+           --- PREMIUM LOADING SCREEN (FIX LOGO) ---
+           ========================================= */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #000; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; z-index: 99999;
             transition: opacity 1.2s cubic-bezier(0.7, 0, 0.3, 1), visibility 1.2s;
         }
-        .loader-content { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 25px; position: relative; z-index: 2; }
-        .loader-logo {
-            width: 150px; height: 150px; object-fit: cover; border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 0 40px rgba(255,255,255,0.1);
-            animation: logoFloat 3s ease-in-out infinite, logoEntry 1.2s forwards; opacity: 0;
+        #loader::after {
+            content: ""; position: absolute; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 30px 30px; animation: particleMove 15s linear infinite; opacity: 0.3;
         }
-        .loader-text { color: #fff; font-size: 1.4rem; font-weight: 900; letter-spacing: 15px; text-transform: uppercase; opacity: 0; animation: textReveal 1s 0.6s forwards; }
-        .loader-bar-container { width: 220px; height: 2px; background: rgba(255,255,255,0.05); position: relative; overflow: hidden; margin-top: 10px; opacity: 0; animation: fadeIn 0.5s 1s forwards; }
-        .loader-bar-fill { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: #fff; animation: loadFill 2.5s 1s forwards; }
+        .loader-content { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 25px; position: relative; z-index: 2; }
+        
+        /* Container Lingkaran Sempurna untuk Logo */
+        .logo-wrapper {
+            width: 150px; height: 150px; border-radius: 50%; overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 0 40px rgba(255,255,255,0.1);
+            background: white; animation: logoFloat 3s ease-in-out infinite, logoEntry 1.2s forwards; opacity: 0;
+        }
+        .loader-logo { width: 100%; height: 100%; object-fit: contain; }
+
+        .loader-text { color: #fff; font-size: 1.4rem; font-weight: 900; letter-spacing: 15px; text-transform: uppercase; opacity: 0; animation: textReveal 1s 0.6s forwards; margin-right: -15px; }
+        .loader-bar-container { width: 220px; height: 2px; background: rgba(255,255,255,0.05); position: relative; overflow: hidden; border-radius: 10px; margin-top: 10px; opacity: 0; animation: fadeIn 0.5s 1s forwards; }
+        .loader-bar-fill { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: #fff; animation: loadFill 2.5s 1s forwards cubic-bezier(0.4, 0, 0.2, 1); }
 
         @keyframes logoEntry { to { opacity: 1; transform: scale(1); } }
         @keyframes logoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes textReveal { to { opacity: 0.9; letter-spacing: 10px; } }
         @keyframes loadFill { to { width: 100%; } }
+        @keyframes particleMove { from { transform: translateY(0); } to { transform: translateY(-30px); } }
         @keyframes fadeIn { to { opacity: 1; } }
         .loaded #loader { opacity: 0; visibility: hidden; }
 
@@ -43,14 +55,14 @@
         
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('IMG-20260224-WA0029.jpg');
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('IMG-20260224-WA0029.jpg');
             background-size: cover; background-position: center; background-attachment: fixed; text-align: center;
         }
         .hero h1 { font-size: clamp(2.5rem, 8vw, 7rem); font-weight: 900; letter-spacing: -3px; text-transform: uppercase; line-height: 0.9; }
         
         .nav-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 30px; padding: 0 20px; }
         .btn-nav { padding: 12px 24px; border: 1px solid white; color: white; text-decoration: none; border-radius: 50px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; background: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .btn-nav:hover { background: white; color: black; }
+        .btn-nav:hover { background: white; color: black; transform: translateY(-3px); }
 
         .main-content { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
         .section-header { text-align: center; margin-bottom: 50px; }
@@ -81,7 +93,9 @@
 
     <div id="loader">
         <div class="loader-content">
-            <img src="Screenshot_20260422-091239_WhatsApp.jpg" class="loader-logo">
+            <div class="logo-wrapper">
+                <img src="Screenshot_20260422-091239_WhatsApp.jpg" class="loader-logo">
+            </div>
             <div class="loader-text">VIII C</div>
             <div class="loader-bar-container"><div class="loader-bar-fill"></div></div>
         </div>
@@ -123,11 +137,11 @@
 
             <section class="section-header"><h2>LOCATION</h2></section>
             <div class="maps-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.123456789!2d124.3176!3d0.7486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327e3d12d3282b45%3A0xadbf42184a2c85c6!2sSMP%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.65866164222!2d124.31505307406692!3d0.7486154629737158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32e31712d3282845%3A0xbd96b4d819b164f0!2sSMP%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1713756000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </main>
         
-        <footer style="text-align:center; padding:40px; opacity:0.4; font-size:0.6rem; letter-spacing:2px;">
+        <footer style="text-align:center; padding:40px; opacity:0.4; font-size:0.6rem; letter-spacing:2px; border-top:1px solid #111;">
             VIII C THEODORUS KOTAMOBAGU<br>Created by <b>Riven Moningka</b>
         </footer>
     </div>
@@ -188,16 +202,19 @@
             window.scrollTo(0,0);
         }
 
+        // --- DAFTAR SISWA ---
         const names = ["Abigail L. Wowor", "Bosco B. Kuntag", "Evelyn M. Prasetya", "Gabriela H. Rumagit", "Gabrielle F. Rondonuwu", "Gracyella S. Watuseke", "Injiltia T. Maratade", "Ivy R. X. Piri", "Jillian I. Rondonuwa", "Joachim L. Rerung", "Jonathan M. Gunadi", "Kayla D. T. Mantiri", "Kimberly G. Tamba", "Kingsley A. Monde", "Laurency I. B. Tuela", "Lionel J. Kojongian", "Maria F. G. Polla", "Michaela L. N. Pelealzu", "Michayla N. Rori", "Nathanael B. Lambayang", "Qimberly L. L. Lonton", "Queennovi Daraung", "Raylene L. L. Pranata", "Riven C. A. Moningka", "Russel Carundeng", "Stacey E. D. Ratag", "Theresia D. J. K. Mundung", "Toar G. Pieter", "Valentino Mogot", "Whitney V. R. Liono"];
         const tb = document.getElementById('list-siswa');
         names.forEach((n, i) => tb.innerHTML += `<tr><td style="color:#555; width:40px;">${i+1}</td><td>${n}</td></tr>`);
 
+        // --- LOGIC POSTING ---
         function postFeed() {
             const n = document.getElementById('sender').value;
             const m = document.getElementById('msg').value;
             const s = document.getElementById('subject').value;
             const i = document.getElementById('imgInput').files[0];
-            if(!n || !m) return alert("Nama dan Pesan harus diisi!");
+            if(!n || !m) return alert("Lengkapi data!");
+
             if(i) {
                 const reader = new FileReader();
                 reader.onload = function(e) { savePost({ n, m, s, img: e.target.result, type: 'feed' }); };
@@ -223,14 +240,16 @@
             const fC = document.getElementById('feed-container');
             const aC = document.getElementById('anon-container');
             db.forEach(t => {
-                const card = `<div class="feed-card">
-                    <span style="float:right; background:white; color:black; font-size:0.6rem; padding:3px 8px; border-radius:4px; font-weight:800;">${t.s}</span>
-                    <b style="font-size:1rem; color:${t.type==='anon'?'#00f2ea':'white'}">${t.n}</b>
-                    <p style="margin-top:15px; color:#ccc; line-height:1.6; white-space:pre-wrap;">${t.m}</p>
-                    ${t.img ? `<img src="${t.img}" style="width:100%; border-radius:12px; margin-top:15px; border:1px solid #222;">` : ''}
-                    <div style="font-size:0.6rem; color:#444; margin-top:15px;">${t.date}</div>
-                </div>`;
-                if(t.type === 'feed') fC.innerHTML += card; else aC.innerHTML += card;
+                const card = `
+                    <div class="feed-card">
+                        <span style="float:right; background:white; color:black; font-size:0.6rem; padding:3px 8px; border-radius:4px; font-weight:800;">${t.s}</span>
+                        <b style="font-size:1rem; color:${t.type==='anon'?'#00f2ea':'white'}">${t.n}</b>
+                        <p style="margin-top:15px; color:#ccc; line-height:1.6; white-space:pre-wrap;">${t.m}</p>
+                        ${t.img ? `<img src="${t.img}" style="width:100%; border-radius:12px; margin-top:15px; border:1px solid #222;">` : ''}
+                        <div style="font-size:0.6rem; color:#444; margin-top:15px;">${t.date}</div>
+                    </div>`;
+                if(t.type === 'feed') fC.innerHTML += card;
+                else aC.innerHTML += card;
             });
         }
         loadPosts();
