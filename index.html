@@ -42,8 +42,6 @@
         .nav-buttons { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 20px; }
         .btn-nav { padding: 14px 25px; border: 1px solid white; color: white; text-decoration: none; border-radius: 50px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; background: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .btn-nav:hover { background: white; color: black; }
-        .btn-anon { border-color: var(--anon); color: var(--anon); }
-        .btn-anon:hover { background: var(--anon); color: black; }
 
         /* --- CONTENT WRAPPER --- */
         .main-content { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
@@ -55,7 +53,6 @@
         .swiper-moments { width: 100%; height: 450px; border-radius: 25px; }
         .swiper-moments .swiper-slide { border-radius: 25px; overflow: hidden; border: 1px solid #222; }
         .swiper-moments img { width: 100%; height: 100%; object-fit: cover; }
-        .swiper-button-next, .swiper-button-prev { color: white !important; transform: scale(0.5); background: rgba(0,0,0,0.3); padding: 30px; border-radius: 50%; }
 
         /* --- MAPS BOX --- */
         .maps-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid #222; filter: grayscale(1) invert(0.9); transition: 0.5s; margin-top: 20px; }
@@ -70,12 +67,10 @@
         input, select, textarea { width: 100%; background: #0a0a0a; border: 1px solid #222; padding: 15px; border-radius: 12px; color: white; margin-top: 10px; outline: none; }
         .feed-card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 20px; margin-bottom: 20px; position: relative; }
         .btn-delete { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #333; cursor: pointer; transition: 0.3s; }
-        .btn-delete:hover { color: #ff4d4d; }
         
         .nav-header { padding: 20px; position: sticky; top: 0; background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; }
         footer { text-align: center; padding: 80px 20px; }
         .credit { font-size: 0.6rem; color: #555; letter-spacing: 1px; margin-top: 10px; }
-        .credit b { color: #888; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -87,11 +82,11 @@
 
     <div id="home-page" class="page active-page">
         <header class="hero">
-            <div class="year-text">Tahun Ajaran 2023/2026</div>
+            <div class="year-text">Tahun Ajaran 2025/2026</div>
             <h1>WELCOME TO<br>VIII C</h1>
             <div class="nav-buttons">
                 <button class="btn-nav" onclick="showPage('tugas-page')"><i class="fa-solid fa-paper-plane"></i> CLASS FEED</button>
-                <button class="btn-nav btn-anon" onclick="showPage('anon-page')"><i class="fa-solid fa-user-secret"></i> PESAN ANONIM</button>
+                <button class="btn-nav" style="border-color:var(--anon); color:var(--anon);" onclick="showPage('anon-page')"><i class="fa-solid fa-user-secret"></i> PESAN ANONIM</button>
                 <a href="https://www.tiktok.com/@eightc_kthdoz" target="_blank" class="btn-nav"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
                 <a href="https://www.instagram.com/8c.smptheodorus" target="_blank" class="btn-nav"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
             </div>
@@ -111,8 +106,6 @@
                         <div class="swiper-slide"><img src="IMG-20260420-WA0004.jpg"></div>
                     </div>
                     <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
                 </div>
             </div>
 
@@ -126,13 +119,13 @@
 
             <section class="section-header" style="margin-top:100px;"><p style="color:#555; letter-spacing:3px; font-size:0.7rem; text-transform:uppercase;">Our Location</p><h2>SCHOOL MAPS</h2></section>
             <div class="maps-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.1762391206494!2d124.31505327421111!3d0.7486411630138927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327f3d69685a6d39%3A0xf6e6b4d819b164f0!2sKampus%20SMP-SMA%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1713757522543!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://maps.google.com/maps/contrib/1114387023465078478443"></iframe>
             </div>
         </main>
 
         <footer>
             <div style="font-size:0.7rem; opacity:0.3; letter-spacing:5px;">VIII C — THEODORUS</div>
-            <div class="credit">Website Created by <b>Riven Moningka</b></div>
+            <div class="credit">Website Created by <b>Nama Kamu</b></div>
         </footer>
     </div>
 
@@ -144,7 +137,18 @@
         <div class="main-content" style="max-width: 700px; padding-top: 40px;">
             <div class="form-box">
                 <input type="text" id="sender" placeholder="Nama lo...">
-                <select id="subject" style="margin-top:15px;"><option>Matematika</option><option>IPA</option><option>B. Indonesia</option><option>Info Umum</option></select>
+                <select id="subject" style="margin-top:15px;">
+                    <option>Pancasila (PKN)</option>
+                    <option>TIK/JU</option>
+                    <option>B.INGG/IT</option>
+                    <option>AGAMA</option>
+                    <option>IPS</option>
+                    <option>SENI</option>
+                    <option>Matematika</option>
+                    <option>IPA</option>
+                    <option>B. Indonesia</option>
+                    <option>Info Umum</option>
+                </select>
                 <textarea id="msg" placeholder="Tulis tugas atau info kelas..."></textarea>
                 <input type="file" id="imgFile" accept="image/*">
                 <button class="btn-nav" style="width:100%; border-radius:12px; margin-top:15px; background:white; color:black;" onclick="postFeed('feed')">Post ke Feed</button>
@@ -160,9 +164,8 @@
         </nav>
         <div class="main-content" style="max-width: 700px; padding-top: 40px;">
             <div class="form-box" style="border-color:var(--anon);">
-                <p style="font-size:0.7rem; color:#888; margin-bottom:10px;">Pesan lo bakal anonim. 🤫</p>
                 <textarea id="anonMsg" placeholder="Tulis pesan rahasia..."></textarea>
-                <button class="btn-nav btn-anon" style="width:100%; border-radius:12px; margin-top:15px;" onclick="postFeed('anon')">Kirim Secara Anonim</button>
+                <button class="btn-nav" style="width:100%; border-radius:12px; margin-top:15px; border-color:var(--anon); color:var(--anon);" onclick="postFeed('anon')">Kirim Secara Anonim</button>
             </div>
             <div id="anon-container"></div>
         </div>
@@ -171,7 +174,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // Init
         window.addEventListener('load', () => setTimeout(() => {
             document.body.classList.add('loaded');
             new Swiper('.swiper-moments', {
@@ -179,7 +181,6 @@
                 cubeEffect: { shadow: true, slideShadows: true, shadowOffset: 20, shadowScale: 0.94 },
                 autoplay: { delay: 3500, disableOnInteraction: false },
                 pagination: { el: '.swiper-pagination', clickable: true },
-                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
             });
         }, 2500));
 
@@ -197,11 +198,11 @@
             let n, m, s, i, key;
             if(type === 'feed') {
                 n = document.getElementById('sender').value; m = document.getElementById('msg').value;
-                s = document.getElementById('subject').value; i = document.getElementById('imgFile'); key = '8C_ULTIMATE_FEED';
+                s = document.getElementById('subject').value; i = document.getElementById('imgFile'); key = '8C_UPDATE_FEED';
             } else {
-                n = "Rahasia 🤫"; m = document.getElementById('anonMsg').value; s = "Secret"; key = '8C_ULTIMATE_ANON';
+                n = "Rahasia 🤫"; m = document.getElementById('anonMsg').value; s = "Secret"; key = '8C_UPDATE_ANON';
             }
-            if(!m || (type==='feed' && !n)) return alert("Lengkapi data!");
+            if(!m || (type==='feed' && !n)) return alert("Isi data!");
             if(type === 'feed' && i.files[0]) {
                 const r = new FileReader();
                 r.onload = (e) => save(n, m, s, e.target.result, key);
@@ -228,11 +229,11 @@
         function load() {
             const fC = document.getElementById('feed-container');
             const aC = document.getElementById('anon-container');
-            const fD = (JSON.parse(localStorage.getItem('8C_ULTIMATE_FEED')) || []).reverse();
-            const aD = (JSON.parse(localStorage.getItem('8C_ULTIMATE_ANON')) || []).reverse();
+            const fD = (JSON.parse(localStorage.getItem('8C_UPDATE_FEED')) || []).reverse();
+            const aD = (JSON.parse(localStorage.getItem('8C_UPDATE_ANON')) || []).reverse();
             fC.innerHTML = ""; aC.innerHTML = "";
-            fD.forEach(t => fC.innerHTML += card(t, '8C_ULTIMATE_FEED'));
-            aD.forEach(t => aC.innerHTML += card(t, '8C_ULTIMATE_ANON'));
+            fD.forEach(t => fC.innerHTML += card(t, '8C_UPDATE_FEED'));
+            aD.forEach(t => aC.innerHTML += card(t, '8C_UPDATE_ANON'));
         }
 
         function card(t, key) {
@@ -249,3 +250,4 @@
     </script>
 </body>
 </html>
+
