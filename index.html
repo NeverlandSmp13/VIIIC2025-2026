@@ -13,14 +13,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- LOADING SCREEN (BERSIH TANPA LOGO) --- */
+        /* --- LOADING SCREEN --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #000; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; z-index: 99999;
             transition: opacity 1s ease, visibility 1s;
         }
-        .loader-content { text-align: center; }
         .loader-text { color: #fff; font-size: 2.5rem; font-weight: 900; letter-spacing: 15px; text-transform: uppercase; animation: pulse 2s infinite; margin-right: -15px; }
         .loader-bar-container { width: 180px; height: 1px; background: rgba(255,255,255,0.1); margin: 20px auto 0; position: relative; overflow: hidden; }
         .loader-bar-fill { position: absolute; top: 0; left: 0; width: 0; height: 100%; background: #fff; animation: loadFill 2s forwards; }
@@ -37,7 +36,7 @@
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('IMG-20260224-WA0029.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed; text-align: center;
+            background-size: cover; background-position: center; text-align: center;
         }
         .hero h1 { font-size: clamp(2rem, 8vw, 6.5rem); font-weight: 900; letter-spacing: -2px; text-transform: uppercase; line-height: 0.9; }
         
@@ -48,19 +47,17 @@
         .main-content { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
         .section-header { text-align: center; margin-bottom: 50px; }
 
-        /* FEED CARDS & BUTTONS */
         .feed-card { background: var(--card); border: 1px solid #222; border-radius: 20px; padding: 25px; margin-bottom: 20px; position: relative; }
-        .btn-delete { position: absolute; bottom: 20px; right: 25px; background: none; border: none; color: #ff4d4d; font-size: 0.7rem; cursor: pointer; opacity: 0.6; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
-        .btn-delete:hover { opacity: 1; }
+        .btn-delete { position: absolute; bottom: 20px; right: 25px; background: none; border: none; color: #ff4d4d; font-size: 0.7rem; cursor: pointer; opacity: 0.6; transition: 0.3s; }
 
-        /* TABLES & FORMS */
         .table-box { background: var(--card); border: 1px solid #222; border-radius: 20px; overflow: hidden; margin-bottom: 50px; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 15px 20px; text-align: left; border-bottom: 1px solid #222; font-size: 0.9rem; }
+        
+        /* FIXED MAPS BOX */
         .maps-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid #222; filter: grayscale(1) invert(0.9); }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* MOMENTS */
         .moments-container { width: 100%; max-width: 400px; margin: 0 auto; padding-bottom: 50px; }
         .swiper-moments { width: 100%; height: 400px; border-radius: 20px; }
         .swiper-moments img { width: 100%; height: 100%; object-fit: cover; }
@@ -73,10 +70,8 @@
 <body>
 
     <div id="loader">
-        <div class="loader-content">
-            <div class="loader-text">VIII C</div>
-            <div class="loader-bar-container"><div class="loader-bar-fill"></div></div>
-        </div>
+        <div class="loader-text">VIII C</div>
+        <div class="loader-bar-container"><div class="loader-bar-fill"></div></div>
     </div>
 
     <div id="home-page" class="page active-page">
@@ -86,8 +81,8 @@
             <div class="nav-buttons">
                 <button class="btn-nav" onclick="showPage('tugas-page')">FEED KELAS</button>
                 <button class="btn-nav" onclick="showPage('anon-page')" style="border-color:var(--anon); color:var(--anon);">ANON CHAT</button>
-                <a href="https://www.tiktok.com/@eightc_kthdoz" target="_blank" class="btn-nav"><i class="fa-brands fa-tiktok"></i> TIKTOK</a>
-                <a href="https://www.instagram.com/8c.smptheodorus" target="_blank" class="btn-nav"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
+                <a href="https://www.tiktok.com/@eightc_kthdoz" target="_blank" class="btn-nav">TIKTOK</a>
+                <a href="https://www.instagram.com/8c.smptheodorus" target="_blank" class="btn-nav">INSTAGRAM</a>
             </div>
         </header>
 
@@ -113,7 +108,7 @@
 
             <section class="section-header"><h2>LOCATION</h2></section>
             <div class="maps-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.123!2d124.3154!3d0.7486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x327e3d12d3282845%3A0xadceb4d84ab065f0!2sSMP%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1713759182341!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.47525381831!2d124.3151092758863!3d0.7486422629235777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32e33d69285a6d39%3A0xffe6b4d619b164f0!2sKampus%20SMP-SMA%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1713783000000!5m2!1sid!2sid"></iframe>
             </div>
         </main>
         
@@ -131,7 +126,7 @@
                     <option>Info Umum</option><option>Pancasila (PKN)</option><option>TIK / JU</option><option>B.Inggris / IT</option>
                     <option>Agama</option><option>IPS</option><option>Seni Budaya</option><option>Matematika</option><option>IPA</option><option>B. Indonesia</option>
                 </select>
-                <textarea id="msg" placeholder="Tulis info tugas atau pengumuman..." style="height:100px; margin-top:10px;"></textarea>
+                <textarea id="msg" placeholder="Tulis info tugas..." style="height:100px; margin-top:10px;"></textarea>
                 <input type="file" id="imgInput" accept="image/*" style="border:none; padding:10px 0;">
                 <button class="btn-nav" style="width:100%; justify-content:center; background:white; color:black; margin-top:20px; font-weight:800;" onclick="postFeed()">POST KE FEED</button>
             </div>
@@ -143,7 +138,7 @@
         <nav class="nav-header"><button onclick="showPage('home-page')" style="background:none; border:none; color:white; cursor:pointer;">← BACK</button><span>SECRET MESSAGE</span></nav>
         <div class="main-content" style="max-width:700px;">
             <div class="form-box">
-                <textarea id="amsg" placeholder="Tulis pesan rahasia di sini..."></textarea>
+                <textarea id="amsg" placeholder="Tulis pesan rahasia..."></textarea>
                 <button class="btn-nav" style="width:100%; justify-content:center; border-color:var(--anon); color:var(--anon); margin-top:20px;" onclick="postAnon()">KIRIM ANONIM</button>
             </div>
             <div id="anon-container"></div>
@@ -153,7 +148,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         window.addEventListener('load', () => {
-            setTimeout(() => { document.body.classList.add('loaded'); new Swiper('.swiper-moments', { effect: 'cube', loop: true, autoplay: {delay:3000} }); }, 2000);
+            setTimeout(() => { document.body.classList.add('loaded'); new Swiper('.swiper-moments', { effect: 'cube', loop: true, autoplay: {delay:3000} }); }, 1500);
         });
 
         function showPage(p) {
@@ -168,7 +163,7 @@
 
         function postFeed() {
             const n = document.getElementById('sender').value, m = document.getElementById('msg').value, s = document.getElementById('subject').value, i = document.getElementById('imgInput').files[0];
-            if(!n || !m) return alert("Lengkapi nama & pesan!");
+            if(!n || !m) return alert("Isi data!");
             if(i) {
                 const r = new FileReader();
                 r.onload = (e) => savePost({ n, m, s, img: e.target.result, type: 'feed' });
@@ -178,28 +173,28 @@
 
         function postAnon() {
             const m = document.getElementById('amsg').value;
-            if(!m) return alert("Pesan masih kosong!");
+            if(!m) return alert("Kosong!");
             savePost({ n: "Seseorang 🤫", m, s: "Secret", img: null, type: 'anon' });
         }
 
         function savePost(data) {
-            const db = JSON.parse(localStorage.getItem('8C_DB_V2')) || [];
+            const db = JSON.parse(localStorage.getItem('8C_FINAL_DB')) || [];
             db.push({ ...data, date: new Date().toLocaleString(), id: Date.now() });
-            localStorage.setItem('8C_DB_V2', JSON.stringify(db));
+            localStorage.setItem('8C_FINAL_DB', JSON.stringify(db));
             location.reload();
         }
 
         function deletePost(id) {
-            if(confirm("Hapus pesan ini secara permanen?")) {
-                let db = JSON.parse(localStorage.getItem('8C_DB_V2')) || [];
+            if(confirm("Hapus?")) {
+                let db = JSON.parse(localStorage.getItem('8C_FINAL_DB')) || [];
                 db = db.filter(p => p.id !== id);
-                localStorage.setItem('8C_DB_V2', JSON.stringify(db));
+                localStorage.setItem('8C_FINAL_DB', JSON.stringify(db));
                 location.reload();
             }
         }
 
         function loadPosts() {
-            const db = (JSON.parse(localStorage.getItem('8C_DB_V2')) || []).reverse();
+            const db = (JSON.parse(localStorage.getItem('8C_FINAL_DB')) || []).reverse();
             db.forEach(t => {
                 const card = `
                     <div class="feed-card">
@@ -208,7 +203,7 @@
                         <p style="margin-top:15px; color:#ccc; white-space:pre-wrap;">${t.m}</p>
                         ${t.img ? `<img src="${t.img}" style="width:100%; border-radius:12px; margin-top:15px; border:1px solid #222;">` : ''}
                         <div style="font-size:0.6rem; color:#444; margin-top:15px;">${t.date}</div>
-                        <button class="btn-delete" onclick="deletePost(${t.id})"><i class="fa-solid fa-trash-can"></i> Hapus</button>
+                        <button class="btn-delete" onclick="deletePost(${t.id})">Hapus</button>
                     </div>`;
                 document.getElementById(t.type === 'feed' ? 'feed-container' : 'anon-container').innerHTML += card;
             });
