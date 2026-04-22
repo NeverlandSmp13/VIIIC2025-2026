@@ -14,18 +14,17 @@
         body { background: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; width: 100%; height: 100%; }
 
         /* =========================================
-           --- LOADING SCREEN PREMIUM (BARU) ---
+           --- PREMIUM LOADING SCREEN ---
            ========================================= */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: #000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 99999; /* Sangat tinggi agar di atas segalanya */
+            z-index: 99999;
             transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 1s;
-            perspective: 1000px; /* Buat efek 3D pas logo muncul */
+            perspective: 1000px;
         }
 
-        /* Container Logo & Teks biar rapi */
         .loader-content {
             text-align: center;
             display: flex;
@@ -34,37 +33,35 @@
             gap: 20px;
         }
 
-        /* Gaya Logo images.jpeg */
+        /* Gaya Logo 1776827439368.png (DIPERBARUI) */
         .loader-logo {
-            width: 150px; /* Ukuran pas di HP/PC */
+            width: 150px;
             height: 150px;
-            object-fit: cover; /* Biar gak gepeng */
-            border-radius: 50%; /* Bulat sempurna ala profil premium */
-            border: 2px solid rgba(255,255,255,0.05); /* Outline tipis mewah */
-            box-shadow: 0 0 30px rgba(255,255,255,0.1); /* Glow halus */
+            object-fit: cover;
+            border-radius: 50%; /* Bulat premium */
+            border: 2px solid rgba(255,255,255,0.05);
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
             
-            /* Animasi Masuk: Muncul dari transparan + muter dikit 3D */
+            /* Animasi Masuk 3D */
             animation: logoEntry 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
             opacity: 0;
             transform: translateZ(-100px) rotateY(10deg);
         }
 
-        /* Teks "VIII C" di bawah logo */
         .loader-text {
             color: #fff;
             font-size: 1.2rem;
             font-weight: 900;
-            letter-spacing: 10px; /* Jarak antar huruf jauh ala aesthetic modern */
+            letter-spacing: 10px;
             text-transform: uppercase;
             opacity: 0;
             animation: textFadeIn 1s 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
-        /* Bar Progress Mewah (Tipis) */
         .loader-bar-container {
             width: 200px;
-            height: 2px; /* Tipis banget biar elegan */
-            background: rgba(255,255,255,0.03); /* Latar belakang bar samar */
+            height: 2px;
+            background: rgba(255,255,255,0.03);
             position: relative;
             overflow: hidden;
             border-radius: 2px;
@@ -73,55 +70,41 @@
             animation: fadeInSimple 0.5s 1s forwards;
         }
 
-        /* Isi Bar yang Jalan */
         .loader-bar-fill {
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 100%;
-            background: #fff; /* Warna bar putih bersih */
-            background: linear-gradient(90deg, transparent, #fff, transparent); /* Efek kilauan jalan */
+            background: linear-gradient(90deg, transparent, #fff, transparent);
             background-size: 200% 100%;
             animation: loadingProgress 2s 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards,
                        barGlow 1.5s infinite;
         }
 
-        /* Kelas untuk menghilangkan loader via JS */
         .loaded #loader {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* --- KEYFRAMES ANIMASI --- */
-        @keyframes logoEntry {
-            to { opacity: 1; transform: translateZ(0) rotateY(0); }
-        }
-        @keyframes textFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 0.7; transform: translateY(0); }
-        }
-        @keyframes loadingProgress {
-            from { width: 0; background-position: 200% 0; }
-            to { width: 100%; background-position: -200% 0; }
-        }
-        @keyframes barGlow {
-            0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 15px rgba(255,255,255,0.3); }
-        }
+        /* Animasi Keyframes */
+        @keyframes logoEntry { to { opacity: 1; transform: translateZ(0) rotateY(0); } }
+        @keyframes textFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 0.7; transform: translateY(0); } }
+        @keyframes loadingProgress { from { width: 0; background-position: 200% 0; } to { width: 100%; background-position: -200% 0; } }
+        @keyframes barGlow { 0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); } 50% { box-shadow: 0 0 15px rgba(255,255,255,0.3); } }
         @keyframes fadeInSimple { to { opacity: 1; } }
 
         /* =========================================
-           --- BAGIAN CSS LAINNYA (TETAP) ---
+           --- CSS UTAMA (TETAP) ---
            ========================================= */
 
-        /* --- NAVIGATION SPA --- */
+        /* NAVIGATION SPA */
         .page { display: none; min-height: 100vh; }
         .active-page { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- HOME PAGE HERO --- */
+        /* HERO */
         .hero {
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('IMG-20260224-WA0029.jpg');
@@ -133,23 +116,23 @@
         .btn-nav { padding: 14px 25px; border: 1px solid white; color: white; text-decoration: none; border-radius: 50px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; background: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .btn-nav:hover { background: white; color: black; }
 
-        /* --- CONTENT WRAPPER --- */
+        /* CONTENT */
         .main-content { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
 
-        /* --- CUBE SLIDER CLASS MOMENTS --- */
+        /* CUBE SLIDER */
         .moments-container { width: 100%; max-width: 450px; margin: 0 auto; perspective: 1000px; padding-bottom: 40px; }
         .swiper-moments { width: 100%; height: 450px; border-radius: 25px; }
         .swiper-moments .swiper-slide { border-radius: 25px; overflow: hidden; border: 1px solid #222; }
         .swiper-moments img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- MAPS BOX --- */
+        /* MAPS */
         .maps-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid #222; filter: grayscale(1) invert(0.9); transition: 0.5s; margin-top: 20px; }
         .maps-box:hover { filter: grayscale(0) invert(0); }
         iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- TABLES & FORMS --- */
+        /* TABLES & FORMS */
         .table-box { background: var(--card); border: 1px solid #222; border-radius: 20px; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 15px 25px; text-align: left; border-bottom: 1px solid #222; }
@@ -167,7 +150,7 @@
 
     <div id="loader">
         <div class="loader-content">
-            <img src="images.jpeg" class="loader-logo" alt="Logo VIII C">
+            <img src="1776827439368.png" class="loader-logo" alt="Logo VIII C">
             <div class="loader-text">VIII C</div>
             <div class="loader-bar-container">
                 <div class="loader-bar-fill"></div>
@@ -214,7 +197,7 @@
 
             <section class="section-header" style="margin-top:100px;"><p style="color:#555; letter-spacing:3px; font-size:0.7rem; text-transform:uppercase;">Our Location</p><h2>SCHOOL MAPS</h2></section>
             <div class="maps-box">
-                <iframe src="https://maps.google.com/maps/contrib/111438702346507847844" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="http://googlehttps://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.474668545802!2d124.3168868!3d0.7513361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32e33d69185a6d39%3A0xffe6b4d819b164f0!2sSMP%20Katolik%20Theodorus!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid07" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </main>
 
@@ -269,19 +252,13 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // Logika Loading & Cube Effect (DIPERBARUI)
+        // Logika Loading & Cube Effect
         window.addEventListener('load', () => {
-            // Kita kasih waktu sedikit lebih lama (3.5 detik total) 
-            // biar animasinya kelihatan premium
             setTimeout(() => {
-                // Hilangkan loader
                 document.body.classList.add('loaded');
-                
-                // Inisialisasi efek kubus SETELAH loader hilang
                 setTimeout(() => {
                     initCube();
-                }, 500); // Kasih jeda dikit biar smooth
-
+                }, 500);
             }, 3500); 
         });
 
@@ -308,9 +285,9 @@
             let n, m, s, i, key;
             if(type === 'feed') {
                 n = document.getElementById('sender').value; m = document.getElementById('msg').value;
-                s = document.getElementById('subject').value; i = document.getElementById('imgFile'); key = '8C_V7_FEED';
+                s = document.getElementById('subject').value; i = document.getElementById('imgFile'); key = '8C_V8_FEED';
             } else {
-                n = "Rahasia 🤫"; m = document.getElementById('anonMsg').value; s = "Secret"; key = '8C_V7_ANON';
+                n = "Rahasia 🤫"; m = document.getElementById('anonMsg').value; s = "Secret"; key = '8C_V8_ANON';
             }
             if(!m || (type==='feed' && !n)) return alert("Isi data!");
             if(type === 'feed' && i.files[0]) {
@@ -339,11 +316,11 @@
         function load() {
             const fC = document.getElementById('feed-container');
             const aC = document.getElementById('anon-container');
-            const fD = (JSON.parse(localStorage.getItem('8C_V7_FEED')) || []).reverse();
-            const aD = (JSON.parse(localStorage.getItem('8C_V7_ANON')) || []).reverse();
+            const fD = (JSON.parse(localStorage.getItem('8C_V8_FEED')) || []).reverse();
+            const aD = (JSON.parse(localStorage.getItem('8C_V8_ANON')) || []).reverse();
             fC.innerHTML = ""; aC.innerHTML = "";
-            fD.forEach(t => fC.innerHTML += card(t, '8C_V7_FEED'));
-            aD.forEach(t => aC.innerHTML += card(t, '8C_V7_ANON'));
+            fD.forEach(t => fC.innerHTML += card(t, '8C_V8_FEED'));
+            aD.forEach(t => aC.innerHTML += card(t, '8C_V8_ANON'));
         }
 
         function card(t, key) {
@@ -351,7 +328,7 @@
                 <button class="btn-delete" onclick="deletePost(${t.id},'${key}')"><i class="fa-solid fa-trash"></i></button>
                 <b style="color:${t.n.includes('Rahasia')?'var(--anon)':'white'}">${t.n}</b>
                 <span style="float:right; background:white; color:black; font-size:0.6rem; padding:3px 8px; border-radius:5px; font-weight:800;">${t.s}</span>
-                <p style="font-size:0.85rem; color:#ccc; margin-top:10px; white-space:pre-wrap;">${t.m}</p>
+                <p style="font-size:0.85rem; color:#ccc; margin-top:10px; white-space: pre-wrap;">${t.m}</p>
                 ${t.img ? `<img src="${t.img}" style="width:100%; border-radius:12px; margin-top:15px; border:1px solid #222;">` : ''}
                 <div style="font-size:0.6rem; color:#333; margin-top:10px;">${t.date}</div>
             </div>`;
